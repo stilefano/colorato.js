@@ -296,3 +296,17 @@ textarea {
         page-break-after: avoid;
     }
 }
+
+body {
+	margin:0;
+	padding:0;
+    background: yellow;
+}
+
+canvas {
+    background: #fff;
+    margin: 0;
+    padding: 0;
+    position:fixed;
+    z-index: -1;
+}
