@@ -10,28 +10,52 @@ $(function() {
 	// var ch = bh + (p*2) + 1;
 	var bs = 50;
 	var scrollSize = 10;
-
+	
+	
+	
 	var canvas = $('<canvas/>').attr({
 		width : bw,
 		height : bh
 	}).appendTo('body');
 
+	var canvasColor=6;
+
 	var context = canvas.get(0).getContext("2d");
 	
 	var colorArrayR;
-
+	
+	var reverse = false;
 
 
 	function drawBoard(firstColor,bw,bh) {
 		//canvas.width=canvas.width;
+
+		colorArrayR = ["00", "08", "10", "18", "20", "28", "30", "38", "40", "48", "50", "58", "60", "68", "70", "78", "80", "88", "90", "98", "A0", "A8", "B0", "B8", "C0", "C8", "D0", "D8", "E0", "E8", "F0", "F8", "FF"]
+		colorArrayG = colorArrayR.slice(0);
+		colorArrayB = colorArrayR.slice(0);
+		
+		
+		
+		if(reverse){
+			firstColor = canvasColor--;
+		}else{
+			firstColor = canvasColor++;
+		}
+		
+		console.log(firstColor)
+		
+		if(firstColor>=colorArrayR.length-2){
+			reverse=true;
+		}else if(firstColor<2){
+			reverse=false;
+		}
+		
 		canvas.attr({
 			width : bw,
 			height : bh
 		})
 
-		colorArrayR = ["00", "08", "10", "18", "20", "28", "30", "38", "40", "48", "50", "58", "60", "68", "70", "78", "80", "88", "90", "98", "A0", "A8", "B0", "B8", "C0", "C8", "D0", "D8", "E0", "E8", "F0", "F8", "FF"]
-		colorArrayG = colorArrayR.slice(0);
-		colorArrayB = colorArrayR.slice(0);
+
 		
 		l=0;
 		i=-1;
@@ -95,13 +119,13 @@ $(function() {
 
 	}
 	
-	var canvasColor=6;
 	
-	drawBoard(6,bw,bh);
+	
+	drawBoard(canvasColor,bw,bh);
 
 	setInterval(function(){
 		bw = $(window).width();
 		bh = $(window).height();
-		drawBoard(canvasColor>=colorArrayR.length?canvasColor=0:canvasColor++,bw,bh);
-	},30)
+		drawBoard(canvasColor,bw,bh);
+	},25)
 })
