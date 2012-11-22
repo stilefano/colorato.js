@@ -8,7 +8,7 @@ $(function() {
 	//size of canvas
 	// var cw = bw + (p*2) + 1;
 	// var ch = bh + (p*2) + 1;
-	var bs = 5;
+	var bs = 50;
 	var scrollSize = 10;
 
 	var canvas = $('<canvas/>').attr({
@@ -17,21 +17,26 @@ $(function() {
 	}).appendTo('body');
 
 	var context = canvas.get(0).getContext("2d");
+	
+	var colorArrayR;
 
-	function drawBoard() {
+
+
+	function drawBoard(firstColor,bw,bh) {
+		//canvas.width=canvas.width;
 		canvas.attr({
 			width : bw,
 			height : bh
 		})
 
-		var colorArrayR = ["00", "08", "10", "18", "20", "28", "30", "38", "40", "48", "50", "58", "60", "68", "70", "78", "80", "88", "90", "98", "A0", "A8", "B0", "B8", "C0", "C8", "D0", "D8", "E0", "E8", "F0", "F8", "FF"]
-		var colorArrayG = colorArrayR.slice(0);
-		var colorArrayB = colorArrayR.slice(0);
+		colorArrayR = ["00", "08", "10", "18", "20", "28", "30", "38", "40", "48", "50", "58", "60", "68", "70", "78", "80", "88", "90", "98", "A0", "A8", "B0", "B8", "C0", "C8", "D0", "D8", "E0", "E8", "F0", "F8", "FF"]
+		colorArrayG = colorArrayR.slice(0);
+		colorArrayB = colorArrayR.slice(0);
 		
 		l=0;
 		i=-1;
 		setReached=0;
-		var mainColor=colorArrayR[15];
+		var mainColor=colorArrayR[firstColor];
 		for (var x=0;x<=bw;x+=bs){
 			i++;
 			
@@ -89,6 +94,14 @@ $(function() {
 		*******/
 
 	}
+	
+	var canvasColor=6;
+	
+	drawBoard(6,bw,bh);
 
-	drawBoard();
+	setInterval(function(){
+		bw = $(window).width();
+		bh = $(window).height();
+		drawBoard(canvasColor>=colorArrayR.length?canvasColor=0:canvasColor++,bw,bh);
+	},30)
 })
