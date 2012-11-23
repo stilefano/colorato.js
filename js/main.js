@@ -74,7 +74,6 @@ $(function() {
 			
 			if (l % 2 == 0){
 				colorArrayG.reverse();
-				console.log(l%2)
 			}
 				
 			l = 1;
@@ -132,7 +131,7 @@ $(function() {
 	 drawBoard(canvasColor,bw,bh);
 	 },25)*/
 
-	$('.colorato').mousedown(function(e) {
+	$('.colorato').click(function(e) {
 		pageCoords = {
 			/*x : Math.floor(e.pageX / bs),
 			y : Math.floor(e.pageY / bs)*/
