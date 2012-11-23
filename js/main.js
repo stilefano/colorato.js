@@ -32,7 +32,7 @@ $(function() {
 		return ((r << 16) | (g << 8) | b).toString(16);
 	}
 
-	function drawBoard(firstColor, bw, bh) {
+	function drawBoard(firstColor, bw, bh,hex) {
 		//canvas.width=canvas.width;
 
 		colorArrayR = ["00", "08", "10", "18", "20", "28", "30", "38", "40", "48", "50", "58", "60", "68", "70", "78", "80", "88", "90", "98", "A0", "A8", "B0", "B8", "C0", "C8", "D0", "D8", "E0", "E8", "F0", "F8", "FF"]
@@ -83,14 +83,19 @@ $(function() {
 					k = 1;
 					l++;
 				}
-				if(firstColor.lenght>3){
-					color = firstColor;	
+				if(hex){
+					//color = hex;	
+					var r = colorArrayR.indexOf(hex.substr(1,2).toUpperCase());
+					var g = colorArrayG.indexOf(hex.substr(3,2).toUpperCase());
+					var b = colorArrayB.indexOf(hex.substr(5,2).toUpperCase());
+					console.log(r,g,b)
+					color = "#"+colorArrayR[r]+colorArrayG[g+k]+colorArrayB[b+i]
 				}else{
-					color = mainColor + colorArrayG[k] + colorArrayB[i];
+					color ="#" + mainColor + colorArrayG[k] + colorArrayB[i];
 				}
 				
 				//var color = mainColor + mainColor + mainColor;
-				context.fillStyle = "#" + color
+				context.fillStyle =  color
 				context.fillRect(x, y, bs, bs);
 			}
 		}
@@ -132,17 +137,18 @@ $(function() {
 	 drawBoard(canvasColor,bw,bh);
 	 },25)*/
 
-	$('.colorato').click(function(e) {
+	$('.colorato').mousedown(function(e) {
 		pageCoords = {
-			x : Math.floor(e.pageX / bs),
-			y : Math.floor(e.pageY / bs)
+			/*x : Math.floor(e.pageX / bs),
+			y : Math.floor(e.pageY / bs)*/
+			x: e.pageX,
+			y: e.pageY
 		}
-		imageData = context.getImageData(pageCoords.x, pageCoords.y, 1, 1).data;
+		imageData = context.getImageData(pageCoords.x, pageCoords.y, bs, bs).data;
 		var hex = "#" + ("000000" + rgbToHex(imageData[0], imageData[1], imageData[2])).slice(-6);
 		bw = $(window).width();
 		bh = $(window).height();
-		console.log(pageCoords.x, hex)
-		drawBoard(hex, bw, bh);
+		drawBoard(pageCoords.x, bw, bh,hex);
 
 	});
 
