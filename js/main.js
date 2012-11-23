@@ -10,7 +10,7 @@ $(function() {
 	// var ch = bh + (p*2) + 1;
 
 	var imageData;
-	var bs = 100;
+	var bs = 20;
 	var scrollSize = 10;
 
 	var canvas = $('<canvas/>').attr({
@@ -60,9 +60,9 @@ $(function() {
 		})
 
 		l = 0;
-		i = -1;
+		hex?i=colorArrayB.indexOf(hex.substr(5,2).toUpperCase()):i = -1;
 		setReached = 0;
-		var mainColor = colorArrayR[firstColor];
+		var mainColor = colorArrayR[hex?colorArrayR.indexOf(hex.substr(1,2).toUpperCase()):firstColor];
 		for (var x = 0; x <= bw; x += bs) {
 			i++;
 
@@ -70,9 +70,13 @@ $(function() {
 				colorArrayB.reverse();
 				i = 1;
 			}
-			k = 0;
-			if (l % 2 == 0)
+			hex?k=colorArrayG.indexOf(hex.substr(3,2).toUpperCase())-1:k = 0;
+			
+			if (l % 2 == 0){
 				colorArrayG.reverse();
+				console.log(l%2)
+			}
+				
 			l = 1;
 
 			for (var y = 0; y <= bh; y += bs) {
@@ -83,23 +87,14 @@ $(function() {
 					k = 1;
 					l++;
 				}
-				if(hex){
-					//color = hex;	
-					var r = colorArrayR.indexOf(hex.substr(1,2).toUpperCase());
-					var g = colorArrayG.indexOf(hex.substr(3,2).toUpperCase());
-					var b = colorArrayB.indexOf(hex.substr(5,2).toUpperCase());
-					console.log(r,g,b)
-					color = "#"+colorArrayR[r]+colorArrayG[g+k]+colorArrayB[b+i]
-				}else{
-					color ="#" + mainColor + colorArrayG[k] + colorArrayB[i];
-				}
 				
+				color ="#" + mainColor + colorArrayG[k] + colorArrayB[i];
 				//var color = mainColor + mainColor + mainColor;
 				context.fillStyle =  color
 				context.fillRect(x, y, bs, bs);
 			}
 		}
-		console.log(color)
+		
 		/**********
 		 function colorObject (colorR,colorG,colorB){
 		 this.r = colorR;
