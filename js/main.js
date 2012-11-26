@@ -19,6 +19,8 @@ $(function() {
 	}).appendTo('body').addClass('colorato');
 
 	var canvasColor = 6;
+	
+	var green;
 
 	var context = canvas.get(0).getContext("2d");
 
@@ -71,13 +73,15 @@ $(function() {
 				i = 1;
 			}
 			hex?k=colorArrayG.indexOf(hex.substr(3,2).toUpperCase())-1:k = 0;
+			console.log(green,"****",colorArrayG[k])
 			
-			if (l % 2 == 0){
+			if (l % 2 == 0 && colorArrayG[k]!=undefined || green!=colorArrayG[k]){
 				colorArrayG.reverse();
 			}
 				
 			l = 1;
-
+			
+			green = colorArrayG[k]
 			for (var y = 0; y <= bh; y += bs) {
 				k++;
 
@@ -92,6 +96,7 @@ $(function() {
 				context.fillStyle =  color
 				context.fillRect(x, y, bs, bs);
 			}
+			
 		}
 		
 		/**********
