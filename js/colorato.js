@@ -3,14 +3,17 @@
 		
 		var defaults = {
 			colorLetter: "r",
-			boxSize: 50
+			saturation:0,
+			boxSize: 50,
+			speed:25
 		}
 		
 		var opt = jQuery.extend(defaults,options);
 		
+		
 		var el=$(this).selector=='body'?$($(window)):$(this);
 		//var el=$(this);
-
+		
 		//console.log($(this))
 		opt.boxSize<20?opt.boxSize=20:opt.boxSize;
 		
@@ -26,6 +29,8 @@
 		}).prependTo($(this).selector=='body'?$('body'):el);
 
 		var canvasColor = 0;
+		
+		canvasColor+=opt.saturation;
 
 		var context = canvas.get(0).getContext("2d");
 
@@ -101,7 +106,7 @@
 			bw = el.width();
 			bh = el.height();
 			drawBoard(canvasColor, bw, bh);
-		}, 25)
+		}, opt.speed)
 
 	}
 })(jQuery);

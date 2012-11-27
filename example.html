@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Colorato plugin</title>
+	<script src="js/vendor/jquery-1.8.3.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/colorato.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" charset="utf-8">
+		$(document).ready(function(){
+			$("body").colorato({
+				colorLetter:"b",
+				boxSize:20,
+				speed: 50
+				});
+			$("#bx").colorato({
+				colorLetter:"g",
+				boxSize:60,
+			});
+			$("#bx1").colorato({
+				colorLetter:"r",
+				boxSize:30,
+				saturation:32
+			});
+			$("#bx2").colorato({
+				colorLetter:"b",
+				boxSize:40,
+				saturation:10
+			});
+		})
+		
+	</script>
+	<link rel="stylesheet" href="css/main.css" type="text/css" media="screen" title="no title" charset="utf-8"/>
+</head>
+<body>
+	<h2>Colorato plugin</h2>
+	<div id="bx" class="box">
+	  lorem ipsum
+	</div>
+	<div id="bx1" class="box">
+	  lorem ipsum
+	</div>		
+	<div id="bx2" class="box">
+	  lorem ipsum
+	</div>	
+</body>
+</html>
