@@ -8,20 +8,22 @@
 		
 		var opt = jQuery.extend(defaults,options);
 		
-		
-		var el = $(this);
+		var el=$(this).selector=='body'?$($(window)):$(this);
+		//var el=$(this);
 
 		//console.log($(this))
 		opt.boxSize<20?opt.boxSize=20:opt.boxSize;
+		
 		var bw = el.width();
-		var bh = el.height();
+		var bh = el.height();
+		
 		var bs = opt.boxSize;
 		var scrollSize = 10;
 
 		var canvas = $('<canvas/>').attr({
 			width : bw,
 			height : bh
-		}).prependTo(el);
+		}).prependTo($(this).selector=='body'?$('body'):el);
 
 		var canvasColor = 0;
 
