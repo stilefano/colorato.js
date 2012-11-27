@@ -1,16 +1,27 @@
 (function($) {
-	$.fn.colorato = function(colorLetter,boxSize) {
+	$.fn.colorato = function(options) {
 		
-		boxSize<20?boxSize=20:boxSize;
-		var bw = $(window).width();
-		var bh = $(window).height();
-		var bs = boxSize;
+		var defaults = {
+			colorLetter: "r",
+			boxSize: 50
+		}
+		
+		var opt = jQuery.extend(defaults,options);
+		
+		
+		var el = $(this);
+
+		//console.log($(this))
+		opt.boxSize<20?opt.boxSize=20:opt.boxSize;
+		var bw = el.width();
+		var bh = el.height();
+		var bs = opt.boxSize;
 		var scrollSize = 10;
 
 		var canvas = $('<canvas/>').attr({
 			width : bw,
 			height : bh
-		}).appendTo('body');
+		}).prependTo(el);
 
 		var canvasColor = 0;
 
@@ -68,11 +79,11 @@
 						l++;
 					}
 					
-					if(colorLetter.toUpperCase()=="R"){
+					if(opt.colorLetter.toUpperCase()=="R"){
 						color=mainColor + colorArrayG[k] + colorArrayB[i];
-					}else if(colorLetter.toUpperCase()=="G"){
+					}else if(opt.colorLetter.toUpperCase()=="G"){
 						color=colorArrayG[k]+mainColor+colorArrayB[i];
-					}else if(colorLetter.toUpperCase()=="B"){
+					}else if(opt.colorLetter.toUpperCase()=="B"){
 						color=colorArrayG[k]+colorArrayB[i]+mainColor;
 					}
 					 
@@ -85,8 +96,8 @@
 
 		drawBoard(canvasColor, bw, bh);
 		setInterval(function() {
-			bw = $(window).width();
-			bh = $(window).height();
+			bw = el.width();
+			bh = el.height();
 			drawBoard(canvasColor, bw, bh);
 		}, 25)
 

@@ -7,13 +7,20 @@
 	<script src="js/colorato.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript" charset="utf-8">
 		$(document).ready(function(){
-			$("body").colorato("b",20);
+			$("body").colorato({
+				colorLetter:"b",
+				boxSize:20
+				});
+			$(".box").colorato("g",30);
 		})
 		
 	</script>
 	<link rel="stylesheet" href="css/main.css" type="text/css" media="screen" title="no title" charset="utf-8"/>
 </head>
 <body>
-	
+	<h2>Colorato plugin</h2>
+	<div class="box" style="width: 200px;display: block;height:200px;">
+	  testo di prova
+	</div>	
 </body>
 </html>
